@@ -3,11 +3,12 @@
   border: 7px solid red;
   height: 250px;
   border-radius: 15px;
+  text-align: center;
+  padding-top: 30px;
 }
 
 #header-text {
 	margin-top: 50px;
-<<<<<<< HEAD
 }
 
 #question {
@@ -21,6 +22,3 @@
 #instructions {
   text-align: center;
 }
-=======
-}
->>>>>>> 8b3b152d5d4ee0de7b12cba76f5085c3d59993a5
