@@ -8,3 +8,15 @@
 #header-text {
 	margin-top: 50px;
 }
+
+#question {
+  border-top: 5px solid blue;
+  padding-top: 15px;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#instructions {
+  text-align: center;
+}
