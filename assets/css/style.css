@@ -1,5 +1,6 @@
-
-#test {
-  background-color: red;
-  border: 1px solid blue;
+#q1, #q2, #q3 {
+  background-color: grey;
+  border: 7px solid red;
+  height: 250px;
+  border-radius: 15px;
 }
