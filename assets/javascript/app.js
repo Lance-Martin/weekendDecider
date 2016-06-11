@@ -69,6 +69,23 @@ $(document).ready(function(){
 
     function results(){
       console.log("User reached the results");
+      var genre = "";
+      if (action > 1) {
+        genre = "action";
+      }
+      if (drama > 1) {
+        genre = "drama";
+      }
+      if (comedy > 1) {
+        genre = "comedy";
+      }
+
+      var queryURL ="http://netflixroulette.net/api/api.php?keyword="+genre;
+      $.ajax({url: queryURL, method: 'GET'})
+     .done(function(response) {
+        console.log(response);
+         var results = response.data; 
+     });
     }
 
     $(".a1").on('click',function(){
