@@ -1,10 +1,38 @@
+
+/*<!--
+Colors codes used
+Primary blue: #00c8f8
+Dark blue button/sub outline: #00447c
+Yellow button/sub outline: #f3b329
+Pink button/sub outline: #b92d5f
+
+--
+Main pink outline: #f06eaa
+Main blue outline: #00aeef
+Main yellow outline: #f7e967
+ -->
+*/
 .a1, .a2, .a3 {
-  background-color: grey;
-  border: 7px solid red;
   height: 250px;
   border-radius: 15px;
   text-align: center;
-  padding-top: 30px;
+  padding-top: 60px;
+  color: white;
+}
+
+.a1 {
+  background-color: #00447c;
+  border: 7px solid #00aeef;
+}
+
+.a2 {
+  background-color: #f3b329;
+  border: 7px solid  #f7e967;
+}
+
+.a3 {
+  background-color: #b92d5f;
+  border: 7px solid #f06eaa;
 }
 
 #header-text {
@@ -12,7 +40,7 @@
 }
 
 #question {
-  border-top: 5px solid blue;
+  border-top: 5px solid #00c8f8;
   padding-top: 15px;
   text-align: center;
   margin-top: 50px;
@@ -27,8 +55,17 @@
 .footer {
   position: relative;
   margin-top: 50px;
-  height: 100px;
+  height: 75px;
   clear:both;
   padding-top:20px;
-  background-color: green;
+  background-color: #00c8f8;
 } 
+
+#netflixAnswers {
+  background-color: #00c8f8;
+  border: 7px solid #00447c;
+  height: 250px;
+  border-radius: 15px;
+  text-align: center;
+  padding-top: 30px;
+}
