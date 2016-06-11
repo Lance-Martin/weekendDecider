@@ -80,11 +80,11 @@ $(document).ready(function(){
         genre = "comedy";
       }
 
-      var queryURL ="http://netflixroulette.net/api/api.php?keyword="+genre;
+      var queryURL = "https://api.themoviedb.org/3/movie/550?api_key=02109c05d4fdc8f5b547ae1daa004712/discover/movie/with_genre=action";
       $.ajax({url: queryURL, method: 'GET'})
      .done(function(response) {
         console.log(response);
-         var results = response.data; 
+         var results = response.data;
      });
     }
 
