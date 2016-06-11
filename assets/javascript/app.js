@@ -70,6 +70,23 @@ $(document).ready(function(){
 
     function results(){
       console.log("User reached the results");
+      var genre = "";
+      if (action > 1) {
+        genre = "action";
+      }
+      if (drama > 1) {
+        genre = "drama";
+      }
+      if (comedy > 1) {
+        genre = "comedy";
+      }
+
+      var queryURL = "https://api.themoviedb.org/3/movie/550?api_key=02109c05d4fdc8f5b547ae1daa004712/discover/movie/with_genre=action";
+      $.ajax({url: queryURL, method: 'GET'})
+     .done(function(response) {
+        console.log(response);
+         var results = response.data;
+     });
     }
 
     $(".a1").on('click',function(){
