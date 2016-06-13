@@ -6,19 +6,20 @@ $(document).ready(function(){
     var q = 1;
     $(".a1,.a2,.a3, #instructions, #question").empty();
     $(".a1,.a2,.a3").attr('id', 'netflixAnswers');
+    $(".footer").attr('id', 'netflixFooter');
     $("#instructions").html("<h3>Question "+q+" of 4</h3>");
     $("#question").html("<h1>Whats the best way to say bye to a comrade?</h1>");
-    $(".a1").html("<h1>Hasta La Vista</h1>");
-    $(".a2").html("<h1>Get busy living or get busy dying</h1>");
-    $(".a3").html("<h1>Take care now, bye bye then</h1>");
+    $(".a1").html("<h2>Hasta La Vista</h2>");
+    $(".a2").html("<h2>Get busy living or get busy dying</h2>");
+    $(".a3").html("<h2>Take care now, bye bye then</h2>");
 
     function question2() {
       $(".a1,.a2,.a3, #instructions, #question").empty();
       $("#instructions").html("<h3>Question "+q+" of 4</h3>");
       $("#question").html("<h1>Zombie apocalypse! Which item would you choose to defend yourself?</h1>");
-      $(".a1").html("<h1>Machine gun</h1>");
-      $(".a2").html("<h1>An Axe</h1>");
-      $(".a3").html("<h1>A Vinyl Record</h1>");
+      $(".a1").html("<h2>Machine gun</h2>");
+      $(".a2").html("<h2>An Axe</h2>");
+      $(".a3").html("<h2>A Vinyl Record</h2>");
       $(".a1").on('click',function(){
         question3();
       });
@@ -34,9 +35,9 @@ $(document).ready(function(){
       $(".a1,.a2,.a3, #instructions, #question").empty();
       $("#instructions").html("<h3>Question "+q+" of 4</h3>");
       $("#question").html("<h1>What’s your choice of transportation?</h1>");
-      $(".a1").html("<h1>Batmobile</h1>");
-      $(".a2").html("<h1>Horse Drawn Carriage</h1>");
-      $(".a3").html("<h1>Inner tube</h1>");
+      $(".a1").html("<h2>Batmobile</h2>");
+      $(".a2").html("<h2>Horse Drawn Carriage</h2>");
+      $(".a3").html("<h2>Inner tube</h2>");
       $(".a1").on('click',function(){
         question4();
       });
@@ -52,9 +53,9 @@ $(document).ready(function(){
       $(".a1,.a2,.a3, #instructions, #question").empty();
       $("#instructions").html("<h3>Question "+q+" of 4</h3>");
       $("#question").html("<h1>Where do you want to eat at?</h1>");
-      $(".a1").html("<h1>Pizza Planet</h1>");
-      $(".a2").html("<h1>Big Kahuna Burger</h1>");
-      $(".a3").html("<h1>Bluth’s Banana Stand</h1>");
+      $(".a1").html("<h2>Pizza Planet</h2>");
+      $(".a2").html("<h2>Big Kahuna Burger</h2>");
+      $(".a3").html("<h2>Bluth’s Banana Stand</h2>");
       $(".a1").on('click',function(){
         console.log(action);
         results();
