@@ -12,6 +12,11 @@ Main blue outline: #00aeef
 Main yellow outline: #f7e967
  -->
 */
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
 .a1, .a2, .a3 {
   height: 250px;
   border-radius: 15px;
@@ -51,7 +56,6 @@ Main yellow outline: #f7e967
   text-align: center;
 }
 
-
 .footer {
   position: relative;
   margin-top: 50px;
@@ -61,9 +65,40 @@ Main yellow outline: #f7e967
   background-color: #00c8f8;
 }
 
+#netflixFooter {
+  background-color: #00447c;
+}
+
+#couponFooter {
+  background-color: #00447c;
+}
+
+#seatGeekFooter {
+  background-color: #00447c;
+}
+
 #netflixAnswers {
+  background-color: #00447c;
+  border: 7px solid #00c8f8;
+  height: 250px;
+  border-radius: 15px;
+  text-align: center;
+  padding-top: 30px;
+}
+
+#couponAnswers {
   background-color: #00c8f8;
-  border: 7px solid #00447c;
+  border: 7px solid #f3b329;
+  height: 250px;
+  border-radius: 15px;
+  text-align: center;
+  padding-top: 30px;
+}
+
+
+#seatGeekAnswers {
+  background-color: #00c8f8;
+  border: 7px solid #b92d5f;
   height: 250px;
   border-radius: 15px;
   text-align: center;

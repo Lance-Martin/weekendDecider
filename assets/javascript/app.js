@@ -7,19 +7,20 @@ $(document).ready(function(){
     var q = 1;
     $(".a1,.a2,.a3, #instructions, #question").empty();
     $(".a1,.a2,.a3").attr('id', 'netflixAnswers');
+    $(".footer").attr('id', 'netflixFooter');
     $("#instructions").html("<h3>Question "+q+" of 4</h3>");
     $("#question").html("<h1>Whats the best way to say bye to a comrade?</h1>");
-    $(".a1").html("<h1>Hasta La Vista</h1>");
-    $(".a2").html("<h1>Get busy living or get busy dying</h1>");
-    $(".a3").html("<h1>Take care now, bye bye then</h1>");
+    $(".a1").html("<h2>Hasta La Vista</h2>");
+    $(".a2").html("<h2>Get busy living or get busy dying</h2>");
+    $(".a3").html("<h2>Take care now, bye bye then</h2>");
 
     function question2() {
       $(".a1,.a2,.a3, #instructions, #question").empty();
       $("#instructions").html("<h3>Question "+q+" of 4</h3>");
       $("#question").html("<h1>Zombie apocalypse! Which item would you choose to defend yourself?</h1>");
-      $(".a1").html("<h1>Machine gun</h1>");
-      $(".a2").html("<h1>An Axe</h1>");
-      $(".a3").html("<h1>A Vinyl Record</h1>");
+      $(".a1").html("<h2>Machine gun</h2>");
+      $(".a2").html("<h2>An Axe</h2>");
+      $(".a3").html("<h2>A Vinyl Record</h2>");
       $(".a1").on('click',function(){
         question3();
       });
@@ -35,9 +36,9 @@ $(document).ready(function(){
       $(".a1,.a2,.a3, #instructions, #question").empty();
       $("#instructions").html("<h3>Question "+q+" of 4</h3>");
       $("#question").html("<h1>What’s your choice of transportation?</h1>");
-      $(".a1").html("<h1>Batmobile</h1>");
-      $(".a2").html("<h1>Horse Drawn Carriage</h1>");
-      $(".a3").html("<h1>Inner tube</h1>");
+      $(".a1").html("<h2>Batmobile</h2>");
+      $(".a2").html("<h2>Horse Drawn Carriage</h2>");
+      $(".a3").html("<h2>Inner tube</h2>");
       $(".a1").on('click',function(){
         question4();
       });
@@ -53,9 +54,9 @@ $(document).ready(function(){
       $(".a1,.a2,.a3, #instructions, #question").empty();
       $("#instructions").html("<h3>Question "+q+" of 4</h3>");
       $("#question").html("<h1>Where do you want to eat at?</h1>");
-      $(".a1").html("<h1>Pizza Planet</h1>");
-      $(".a2").html("<h1>Big Kahuna Burger</h1>");
-      $(".a3").html("<h1>Bluth’s Banana Stand</h1>");
+      $(".a1").html("<h2>Pizza Planet</h2>");
+      $(".a2").html("<h2>Big Kahuna Burger</h2>");
+      $(".a3").html("<h2>Bluth’s Banana Stand</h2>");
       $(".a1").on('click',function(){
         console.log(action);
         results();
@@ -147,5 +148,117 @@ $(document).ready(function(){
         console.log(response);
       });
     });
+
+///start here//
+  $('.a2').on('click',function(){
+    var restaurant = 0;
+    var entertainment = 0;
+    var shopping = 0;
+    var q = 1;
+    $(".a1,.a2,.a3, #instructions, #question").empty();
+    $(".a1,.a2,.a3").attr('id', 'couponAnswers');
+    $(".footer").attr('id', 'couponFooter');
+    $("#instructions").html("<h3>Question "+q+" of 4</h3>");
+    $("#question").html("<h1>What sounds most appealing?</h1>");
+    $(".a1").html("<h2>A fine dining experience</h2>");
+    $(".a2").html("<h2>Theatre or painting</h2>");
+    $(".a3").html("<h2>Shopping spree</h2>");
+
+    function question2() {
+      $(".a1,.a2,.a3, #instructions, #question").empty();
+      $("#instructions").html("<h3>Question "+q+" of 4</h3>");
+      $("#question").html("<h1>You are granted a lifetime supply of one of the items below. Which would it be?</h1>");
+      $(".a1").html("<h2>Steak dinners</h2>");
+      $(".a2").html("<h2>Art lessons</h2>");
+      $(".a3").html("<h2>Video games</h2>");
+      $(".a1").on('click',function(){
+        question3();
+      });
+      $(".a2").on('click',function(){
+        question3();
+      });
+      $(".a3").on('click',function(){
+        question3();
+      });
+    }
+
+    function question3(){
+      $(".a1,.a2,.a3, #instructions, #question").empty();
+      $("#instructions").html("<h3>Question "+q+" of 4</h3>");
+      $("#question").html("<h1>What best suits your personality?</h1>");
+      $(".a1").html("<h2>Being catered to</h2>");
+      $(".a2").html("<h2>Finding great bargains</h2>");
+      $(".a3").html("<h2>Creating something from scratch</h2>");
+      $(".a1").on('click',function(){
+        question4();
+      });
+      $(".a2").on('click',function(){
+        question4();
+      });
+      $(".a3").on('click',function(){
+        question4();
+      });
+    }
+
+    function question4() {
+      $(".a1,.a2,.a3, #instructions, #question").empty();
+      $("#instructions").html("<h3>Question "+q+" of 4</h3>");
+      $("#question").html("<h1>If you could sum up your daily thoughts in one word, what would it be?</h1>");
+      $(".a1").html("<h2>Hungry</h2>");
+      $(".a2").html("<h2>Indulgent</h2>");
+      $(".a3").html("<h2>Imaginative</h2>");
+      $(".a1").on('click',function(){
+        console.log(restaurant);
+        results();
+      });
+      $(".a2").on('click',function(){
+        results();
+      });
+      $(".a3").on('click',function(){
+        results();
+      });
+    }
+
+  // function results(){
+  //     console.log("User reached the results");
+  //     var couponPreference = "";
+  //     if (restaurant > 1) {
+  //       couponPreference = "restaurant";
+  //     }
+  //     if (entertainment > 1) {
+  //       couponPreference = "entertainment";
+  //     }
+  //     if (shopping > 1) {
+  //       couponPreference = "shopping";
+  //     }
+
+  //   //   var queryURL = "https://api.themoviedb.org/3/movie/550?api_key=02109c05d4fdc8f5b547ae1daa004712/discover/movie/with_genre=action";
+  //   //   $.ajax({url: queryURL, method: 'GET'})
+  //   //  .done(function(response) {
+  //   //     console.log(response);
+  //   //      var results = response.data;
+  //   //  });
+  //   // }
+
+    $(".a1").on('click',function(){
+      restaurant++;
+      q++;
+      question2();
+    });
+
+    $(".a2").on('click', function(){
+      entertainment++;
+      q++;
+      question2();
+    });
+
+    $(".a3").on('click',function(){
+      shopping++;
+      q++;
+      question2();
+    });
+
+
   });
+});
 });
