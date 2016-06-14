@@ -5,7 +5,8 @@ $(document).ready(function(){
     var drama = 0;
     var comedy = 0;
     var q = 1;
-    $(".a1,.a2,.a3, #instructions, #question").empty();
+    $("#answers, #instructions, #question").empty();
+    $('#answers').html('<div class = "col-md-2 col-md-offset-2 a1"></div><div class = "col-md-2 col-md-offset-1 a2"></div><div class = "col-md-2 col-md-offset-1 a3"></div>');
     $(".a1,.a2,.a3").attr('id', 'netflixAnswers');
     $(".footer").attr('id', 'netflixFooter');
     $("#instructions").html("<h3>Question "+q+" of 4</h3>");
@@ -110,14 +111,15 @@ $(document).ready(function(){
   });
 
   $(".a3").on('click',function(){
+    $('.footer').attr('id', 'seatGeekFooter');
     $('#answers, #question, #instructions').empty();
     $('#question').html('<h1>What is most appealing?</h1>');
-    $('#answers').html('<div class = "col-md-2 col-md-offset-2 a1"><h1>Sports, sports, sports</h1></div><div class = "col-md-2 col-md-offset-1 a2"><h1>Show me some standup</h1></div><div class = "col-md-2 col-md-offset-1 a3"><h1>Boom Boom Bass</h1></div>');
+    $('#answers').html('<div class = "col-md-2 col-md-offset-2 a1" id = "seatGeekAnswers"><h1>Sports, sports, sports</h1></div><div class = "col-md-2 col-md-offset-1 a2" id = "seatGeekAnswers"><h1>Show me some standup</h1></div><div class = "col-md-2 col-md-offset-1 a3" id = "seatGeekAnswers"><h1>Boom Boom Bass</h1></div>');
 
     $('.a1').on('click',function(){
       var sport = "";
       $('#answers, #question, #instructions').empty();
-      $('#answers').html('<div class = "col-md-2 col-md-offset-2 a1"></div><div class = "col-md-2 col-md-offset-1 a2"></div><div class = "col-md-2 col-md-offset-1 a3"></div>');
+      $('#answers').html('<div class = "col-md-2 col-md-offset-2 a1" id = "seatGeekAnswers"></div><div class = "col-md-2 col-md-offset-1 a2" id ="seatGeekAnswers"></div><div class = "col-md-2 col-md-offset-1 a3" id = "seatGeekAnswers"></div>');
       $('#question').html('<h1>Which Sport?</h1>');
       $('.a1').html('<h1>MLB</h1>');
       $('.a2').html('<h1>NFL</h1>');
@@ -140,22 +142,26 @@ $(document).ready(function(){
       });
     });
     $('.a2').on('click',function(){
-      console.log('a2 click');
-      $('#answers, #question, #instructions').empty();
-      queryURL =
-      'https://api.seatgeek.com/2/performers?taxonomies.name=comedy';
-      $.ajax({url: queryURL, method: 'GET'}).done(function(response){
-        console.log(response);
+        console.log('a2 click');
+        $('#answers, #question, #instructions').empty();
+        queryURL =
+        'https://api.seatgeek.com/2/performers?taxonomies.name=comedy';
+        $.ajax({url: queryURL, method: 'GET'}).done(function(response){
+          console.log(response);
       });
     });
-
+    $('.a3').on('click',function(){
+      $('#answers, #question, #instructions').empty();
+    });
+});
 ///start here//
   $('.a2').on('click',function(){
     var restaurant = 0;
     var entertainment = 0;
     var shopping = 0;
     var q = 1;
-    $(".a1,.a2,.a3, #instructions, #question").empty();
+    $("#answers, #instructions, #question").empty();
+    $('#answers').html('<div class = "col-md-2 col-md-offset-2 a1"></div><div class = "col-md-2 col-md-offset-1 a2"></div><div class = "col-md-2 col-md-offset-1 a3"></div>');
     $(".a1,.a2,.a3").attr('id', 'couponAnswers');
     $(".footer").attr('id', 'couponFooter');
     $("#instructions").html("<h3>Question "+q+" of 4</h3>");
@@ -219,26 +225,26 @@ $(document).ready(function(){
       });
     }
 
-  // function results(){
-  //     console.log("User reached the results");
-  //     var couponPreference = "";
-  //     if (restaurant > 1) {
-  //       couponPreference = "restaurant";
-  //     }
-  //     if (entertainment > 1) {
-  //       couponPreference = "entertainment";
-  //     }
-  //     if (shopping > 1) {
-  //       couponPreference = "shopping";
-  //     }
+  function results(){
+      console.log("User reached the results");
+      var couponPreference = "";
+      if (restaurant > 1) {
+        couponPreference = "categoryid=1";
+      }
+      if (entertainment > 1) {
+        couponPreference = "categoryid=2";
+      }
+      if (shopping > 1) {
+        couponPreference = "categoryid=6";
+      }
 
-  //   //   var queryURL = "https://api.themoviedb.org/3/movie/550?api_key=02109c05d4fdc8f5b547ae1daa004712/discover/movie/with_genre=action";
-  //   //   $.ajax({url: queryURL, method: 'GET'})
-  //   //  .done(function(response) {
-  //   //     console.log(response);
-  //   //      var results = response.data;
-  //   //  });
-  //   // }
+      var queryURL = "http://api.8coupons.com/v1/getrealtimelocaldeals?key=XYZ&"+couponPreference;
+      $.ajax({url: queryURL, method: 'GET'})
+     .done(function(response) {
+        console.log(response);
+         var results = response.data;
+     });
+    }
 
     $(".a1").on('click',function(){
       restaurant++;
@@ -257,8 +263,5 @@ $(document).ready(function(){
       q++;
       question2();
     });
-
-
   });
-});
 });
