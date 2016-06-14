@@ -1,0 +1,47 @@
+.text-lazy {
+  color: #00447c;
+}
+
+.text-thrifty {
+  color: #f3b329;
+}
+
+.text-amped {
+  color: #b92d5f;
+}
+
+.intro-lead-in {
+	color: white;
+}
+
+.intro-heading {
+	color: white;
+}
+
+.lazyMood:hover, .thriftyMood:hover, .ampedMood:hover { 
+  opacity: .7;
+}
+
+.a1:hover, .a2:hover, .a3:hover { 
+  opacity: .7;
+}
+
+.footer {
+  position: relative;
+  height: 75px;
+  clear:both;
+  background-color: #00c8f8;
+} 
+
+
+#mainQuestionArea {
+  display: none;
+}
+
+#resultsPage {
+  display: none;
+}
+
+.answer-circles {
+  color: #00c8f8;
+}
