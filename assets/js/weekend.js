@@ -208,22 +208,34 @@ function pageLoad(){
       var couponPreference = "";
       if (restaurants > 1) {
         couponPreference = "restaurants";
+        category = "restaurants";
       }
       if (entertainment > 1) {
         couponPreference = "entertainment";
+        category = "activities-events";
       }
       if (shopping > 1) {
         couponPreference = "shopping";
+        category = "retail-services";
       }
       $(".resultsLine").html("We see you like "+couponPreference+".<br> Here are some coupon suggestions to try something new!");
-      $(".broughtBy").html("This movie result was brought to you by XXXXX");
+      $(".broughtBy").html("This coupon result was brought to you by Sqoot.com");
 
-     //  var queryURL = "https://api.themoviedb.org/3/movie/550?api_key=02109c05d4fdc8f5b547ae1daa004712/discover/movie/with_genre=action";
-     //  $.ajax({url: queryURL, method: 'GET'})
-     // .done(function(response) {
-     //    console.log(response);
-     //     var results = response.data;
-     // });
+      var queryURL = "http://api.sqoot.com/v2/deals?category_slugs="+category+"&api_key=olseu";
+      console.log(queryURL);
+      $.ajax({
+        url: queryURL, 
+        method:'GET',
+        dataType: 'jsonp'
+      }).done(function(response) {
+        console.log(response);
+        console.log("loggedresponse");
+        var randomNum = Math.floor((Math.random() * response.deals.length) +1);
+        console.log(response.deals[randomNum]);
+        var outcome = response.deals[randomNum];
+        console.log(outcome);
+        $(".apiResult").append(outcome.deal.description);
+     });
     }
 
     $(".a1").on('click',function(){
@@ -346,6 +358,9 @@ function pageLoad(){
 
 pageLoad()
 
+/*function resetGame(){
+  document.location.reload(true);
+}; */
 
 $(".startOver").on('click',function(){
 	  $("#mood").show();
