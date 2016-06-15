@@ -84,17 +84,20 @@ function pageLoad(){
       var genre = "";
       if (action > 1) {
         genre = "action";
+        category = 28;
       }
       if (drama > 1) {
         genre = "drama";
+        category = 18;
       }
       if (comedy > 1) {
         genre = "comedy";
+        category = 35;
       }
       $(".resultsLine").html("We see you like "+genre+" movies.<br> Time for some Netflix and Chill.");
       $(".broughtBy").html("This movie result was brought to you by Netflix Roulette");
 
-    	var queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=02109c05d4fdc8f5b547ae1daa004712&with_genres="+18+"&sort_by=popularity.desc&include_adult=true";
+    	var queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=02109c05d4fdc8f5b547ae1daa004712&with_genres="+category+"&sort_by=popularity.desc&include_adult=true";
       $.ajax({url: queryURL, method: 'GET'})
      	.done(function(response) {
       console.log(response);
