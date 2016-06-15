@@ -1,4 +1,3 @@
-
 function pageLoad(){
 	$("#mainQuestionArea").hide();
 	}
@@ -84,21 +83,27 @@ function pageLoad(){
       var genre = "";
       if (action > 1) {
         genre = "action";
+        category = 28;
       }
       if (drama > 1) {
         genre = "drama";
+        category = 18;
       }
       if (comedy > 1) {
         genre = "comedy";
+        category = 35;
       }
       $(".resultsLine").html("We see you like "+genre+" movies.<br> Time for some Netflix and Chill.");
-      $(".broughtBy").html("This movie result was brought to you by Netflix Roulette");
+      $(".broughtBy").html("This movie result was brought to you by themoviedb.org");
 
-    	var queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=02109c05d4fdc8f5b547ae1daa004712&with_genres="+18+"&sort_by=popularity.desc&include_adult=true";
+    	var queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=02109c05d4fdc8f5b547ae1daa004712&with_genres="+category+"&sort_by=popularity.desc&include_adult=true";
       $.ajax({url: queryURL, method: 'GET'})
      	.done(function(response) {
       console.log(response);
-      var results = response.data;
+      var randomNum = Math.floor((Math.random() * response.results.length) +1);
+      console.log(response.results[randomNum]);
+      var outcome = response.results[randomNum];
+      $(".apiResult").append("<img src=https://image.tmdb.org/t/p/w185/"+outcome.poster_path+">");
      });
     }
 
@@ -202,22 +207,34 @@ function pageLoad(){
       var couponPreference = "";
       if (restaurants > 1) {
         couponPreference = "restaurants";
+        category = "restaurants";
       }
       if (entertainment > 1) {
         couponPreference = "entertainment";
+        category = "activities-events";
       }
       if (shopping > 1) {
         couponPreference = "shopping";
+        category = "retail-services";
       }
       $(".resultsLine").html("We see you like "+couponPreference+".<br> Here are some coupon suggestions to try something new!");
-      $(".broughtBy").html("This movie result was brought to you by XXXXX");
+      $(".broughtBy").html("This coupon result was brought to you by Sqoot.com");
 
-     //  var queryURL = "https://api.themoviedb.org/3/movie/550?api_key=02109c05d4fdc8f5b547ae1daa004712/discover/movie/with_genre=action";
-     //  $.ajax({url: queryURL, method: 'GET'})
-     // .done(function(response) {
-     //    console.log(response);
-     //     var results = response.data;
-     // });
+      var queryURL = "http://api.sqoot.com/v2/deals?category_slugs="+category+"&api_key=olseu";
+      console.log(queryURL);
+      $.ajax({
+        url: queryURL,
+        method:'GET',
+        dataType: 'jsonp'
+      }).done(function(response) {
+        console.log(response);
+        console.log("loggedresponse");
+        var randomNum = Math.floor((Math.random() * response.deals.length) +1);
+        console.log(response.deals[randomNum]);
+        var outcome = response.deals[randomNum];
+        console.log(outcome);
+        $(".apiResult").append(outcome.deal.description);
+     });
     }
 
     $(".a1").on('click',function(){
@@ -243,7 +260,7 @@ function pageLoad(){
 
 ///The onClick series that begins when Amped is clicked
 
-	$(".ampedMood").click(function(){
+$(".ampedMood").click(function(){
 	  $("#mood").hide();
 	  $("#mainQuestionArea").show();
 		$('.questionAsked').html('<h1>Which is most appealing?</h1>');
@@ -344,103 +361,14 @@ function pageLoad(){
 				//add ajax call here
 			}
 		});
-
-
-
-	  // var restaurants = 0;
-    // var entertainment = 0;
-    // var shopping = 0;
-    // // $(".a1,.a2,.a3").attr('id', 'netflixAnswers');
-    // $(".questionAsked").html("What sounds most appealing?");
-    // // $(".questionNumber").html("Question "+q+" of 4");
-    // $(".text1").html("Sports, Sports, Sports");
-    // $(".text2").html("Show Me Some Standup");
-    // $(".text3").html("Dat Boom Boom Bass");
-		//
-    // function sportsInput() {
-    //   // $(".a1,.a2,.a3, #instructions, #question").empty();
-    //   $(".questionAsked").html("Which league are you most interested in?");
-    //   $(".text1").html("NFL");
-    // 	$(".text2").html("MLB");
-    // 	$(".text3").html("NBA");
-    //   // $(".a1").on('click',function(){
-    //   //   question3();
-    //   // });
-    //   // $(".a2").on('click',function(){
-    //   //   question3();
-    //   // });
-    //   // $(".a3").on('click',function(){
-    //   //   question3();
-    //   // });
-    // }
-		//
-    // function musicInput(){
-    //   // $(".a1,.a2,.a3, #instructions, #question").empty();
-    //   $(".questionAsked").html("What genre instrests you the most?");
-    //   $(".text1").html("Country");
-    // 	$(".text2").html("Pop");
-    // 	$(".text3").html("Rock");
-    //   $(".a1").on('click',function(){
-    //     question4();
-    //   });
-    //   $(".a2").on('click',function(){
-    //     question4();
-    //   });
-    //   $(".a3").on('click',function(){
-    //     question4();
-    //   });
-    // }
-		//
-    // function results(){
-    // 	$("#mood").hide();
-	  // 	$("#mainQuestionArea").hide();
-	  // 	$("#resultsPage").show();
-    //   console.log("User reached the results");
-    //   console.log(restaurants);
-    //   console.log(entertainment);
-    //   console.log(shopping);
-		//
-    //   var couponPreference = "";
-    //   if (restaurants > 1) {
-    //     couponPreference = "restaurants";
-    //   }
-    //   if (entertainment > 1) {
-    //     couponPreference = "entertainment";
-    //   }
-    //   if (shopping > 1) {
-    //     couponPreference = "shopping";
-    //   }
-    //   $(".resultsLine").html("We see you like "+couponPreference+".<br> Here are some coupon suggestions to try something new!");
-    //   $(".broughtBy").html("This movie result was brought to you by XXXXX");
-		//
-    //  //  var queryURL = "https://api.themoviedb.org/3/movie/550?api_key=02109c05d4fdc8f5b547ae1daa004712/discover/movie/with_genre=action";
-    //  //  $.ajax({url: queryURL, method: 'GET'})
-    //  // .done(function(response) {
-    //  //    console.log(response);
-    //  //     var results = response.data;
-    //  // });
-    // }
-		//
-    // $(".a1").on('click',function(){
-    //   sportsInput();
-    // });
-		//
-    // $(".a2").on('click', function(){
-    //  	$("#mood").hide();
-	  // 	$("#mainQuestionArea").hide();
-	  // 	$("#resultsPage").show();
-	  // 	$(".resultsLine").html("We see you like some stand up!<br> Here are people coming to your area!");
-    //   $(".broughtBy").html("This movie result was brought to you by XXXXX");
-    // });
-		//
-    // $(".a3").on('click',function(){
-		// 		musicInput();
-    // });
   });
 
 
 pageLoad();
 
+/*function resetGame(){
+  document.location.reload(true);
+}; */
 
 $(".startOver").on('click',function(){
 	  $("#mood").show();
