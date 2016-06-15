@@ -264,99 +264,197 @@ function pageLoad(){
 	$(".ampedMood").click(function(){
 	  $("#mood").hide();
 	  $("#mainQuestionArea").show();
-	  var restaurants = 0;
-    var entertainment = 0;
-    var shopping = 0;
-    // $(".a1,.a2,.a3").attr('id', 'netflixAnswers');
-    $(".questionAsked").html("What sounds most appealing?");
-    // $(".questionNumber").html("Question "+q+" of 4");
-    $(".text1").html("Sports, Sports, Sports");
-    $(".text2").html("Show Me Some Standup");
-    $(".text3").html("Dat Boom Boom Bass");
+		$('.questionAsked').html('<h1>Which is most appealing?</h1>');
+    $('.text1').html('Sports, sports, sports');
+    $('.text2').html('Show me some standup');
+    $('.text3').html('Boom Boom Bass');
+		$('.a1').on('click',function(){
+			console.log("this click works");
+        $('.questionAsked').html('<h1>Which Sport?</h1>');
+				$('.text1').html('MLB');
+				$('.text2').html('NFL');
+				$('.text3').html('NBA');
+				$('.a1').on('click',function() {
+					 sport = "mlb";
+					 $('#mainQuestionArea').empty();
+					 $('.questionAsked').html('<h1>Which Team?</h1>');
+					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3 a1" style = "text-align: center;"><form><div class ="forum-group"><label for ="">Type a team name</label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px;"><br><button type="submit" class="btn btn-primary">Submit</button></div></form></div></div>');
 
-    function sportsInput() {
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
-      $(".questionAsked").html("Which league are you most interested in?");
-      $(".text1").html("NFL");
-    	$(".text2").html("MLB");
-    	$(".text3").html("NBA");
-      // $(".a1").on('click',function(){
-      //   question3();
-      // });
-      // $(".a2").on('click',function(){
-      //   question3();
-      // });
-      // $(".a3").on('click',function(){
-      //   question3();
-      // });
-    }
+					 $('button').on('click',function() {
+						 $('#mainQuestionArea').hide();
+						 $('#resultsPage').show();
+						 var team = $('#team').val().trim();
+						 $('#answers, #question, #instructions').empty();
+						 //need to change ajax call
+						 var queryURL = 'https://api.seatgeek.com/2/events?venue.state=TX';
+						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
+							 console.log(response);
+						 });
+						 return false;
+					 });
+				});
+				$('.a2').on('click',function() {
+					 sport = "nfl";
+					 $('#mainQuestionArea').empty();
+					 $('.questionAsked').html('<h1>Which Team?</h1>');
+					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3 a1" style = "text-align: center;"><form><div class ="forum-group"><label for ="">Type a team name</label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px;"><br><button type="submit" class="btn btn-primary">Submit</button></div></form></div></div>');
 
-    function musicInput(){
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
-      $(".questionAsked").html("What genre instrests you the most?");
-      $(".text1").html("Country");
-    	$(".text2").html("Pop");
-    	$(".text3").html("Rock");
-      $(".a1").on('click',function(){
-        question4();
-      });
-      $(".a2").on('click',function(){
-        question4();
-      });
-      $(".a3").on('click',function(){
-        question4();
-      });
-    }
+					 $('button').on('click',function() {
+						 $('#mainQuestionArea').hide();
+						 $('#resultsPage').show();
+						 var team = $('#team').val().trim();
+						 $('#answers, #question, #instructions').empty();
+						 var queryURL = 'https://api.seatgeek.com/2/events?venue.state=TX';
+						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
+							 console.log(response);
+						 });
+						 return false;
+					 });
+				});
+				$('.a3').on('click',function() {
+					 sport = "nfl";
+					 $('#mainQuestionArea').empty();
+					 $('.questionAsked').html('<h1>Which Team?</h1>');
+					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3 a1" style = "text-align: center;"><form><div class ="forum-group"><label for ="">Type a team name</label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px;"><br><button type="submit" class="btn btn-primary">Submit</button></div></form></div></div>');
 
-    function results(){
-    	$("#mood").hide();
-	  	$("#mainQuestionArea").hide();
-	  	$("#resultsPage").show();
-      console.log("User reached the results");
-      console.log(restaurants);
-      console.log(entertainment);
-      console.log(shopping);
+					 $('button').on('click',function() {
+						 $('#mainQuestionArea').hide();
+						 $('#resultsPage').show();
+						 var team = $('#team').val().trim();
+						 $('#answers, #question, #instructions').empty();
+						 var queryURL = 'https://api.seatgeek.com/2/events?venue.state=TX';
+						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
+							 console.log(response);
+						 });
+						 return false;
+					 });
+				});
+		});
+		$('.a2').on('click',function(){
+			$('#mainQuestionArea').hide();
+			$('#resultsPage').show();
+		});
 
-      var couponPreference = "";
-      if (restaurants > 1) {
-        couponPreference = "restaurants";
-      }
-      if (entertainment > 1) {
-        couponPreference = "entertainment";
-      }
-      if (shopping > 1) {
-        couponPreference = "shopping";
-      }
-      $(".resultsLine").html("We see you like "+couponPreference+".<br> Here are some coupon suggestions to try something new!");
-      $(".broughtBy").html("This movie result was brought to you by XXXXX");
+		$('.a3').on('click',function(){
+			$('.questionAsked').html('<h1>Which Genre?</h1>');
+			$('.text1').html('Country');
+			$('.text2').html('Hip-hop');
+			$('.text3').html('Rock');
+			$('.a1').on('click',function(){
+				genre = "country";
+				$('#mainQuestionArea').hide();
+				$('#resultsPage').show();
+				//add ajax call here
+			});
+			$('.a2').on('click',function(){
+				genre = "hip-hop";
+				$('#mainQuestionArea').hide();
+				$('#resultsPage').show();
+				//add ajax call here
+			});
+			$('.a3').on('click',function(){
+				genre = "rock";
+				$('#mainQuestionArea').hide();
+				$('#resultsPage').show();
+				//add ajax call here
+			});
+		});
 
-     //  var queryURL = "https://api.themoviedb.org/3/movie/550?api_key=02109c05d4fdc8f5b547ae1daa004712/discover/movie/with_genre=action";
-     //  $.ajax({url: queryURL, method: 'GET'})
-     // .done(function(response) {
-     //    console.log(response);
-     //     var results = response.data;
-     // });
-    }
 
-    $(".a1").on('click',function(){
-      sportsInput();
-    });
 
-    $(".a2").on('click', function(){
-     	$("#mood").hide();
-	  	$("#mainQuestionArea").hide();
-	  	$("#resultsPage").show();;
-	  	$(".resultsLine").html("We see you like some stand up!<br> Here are people coming to your area!");
-      $(".broughtBy").html("This movie result was brought to you by XXXXX");
-    });
-
-    $(".a3").on('click',function(){
-				musicInput();
-    });
+	  // var restaurants = 0;
+    // var entertainment = 0;
+    // var shopping = 0;
+    // // $(".a1,.a2,.a3").attr('id', 'netflixAnswers');
+    // $(".questionAsked").html("What sounds most appealing?");
+    // // $(".questionNumber").html("Question "+q+" of 4");
+    // $(".text1").html("Sports, Sports, Sports");
+    // $(".text2").html("Show Me Some Standup");
+    // $(".text3").html("Dat Boom Boom Bass");
+		//
+    // function sportsInput() {
+    //   // $(".a1,.a2,.a3, #instructions, #question").empty();
+    //   $(".questionAsked").html("Which league are you most interested in?");
+    //   $(".text1").html("NFL");
+    // 	$(".text2").html("MLB");
+    // 	$(".text3").html("NBA");
+    //   // $(".a1").on('click',function(){
+    //   //   question3();
+    //   // });
+    //   // $(".a2").on('click',function(){
+    //   //   question3();
+    //   // });
+    //   // $(".a3").on('click',function(){
+    //   //   question3();
+    //   // });
+    // }
+		//
+    // function musicInput(){
+    //   // $(".a1,.a2,.a3, #instructions, #question").empty();
+    //   $(".questionAsked").html("What genre instrests you the most?");
+    //   $(".text1").html("Country");
+    // 	$(".text2").html("Pop");
+    // 	$(".text3").html("Rock");
+    //   $(".a1").on('click',function(){
+    //     question4();
+    //   });
+    //   $(".a2").on('click',function(){
+    //     question4();
+    //   });
+    //   $(".a3").on('click',function(){
+    //     question4();
+    //   });
+    // }
+		//
+    // function results(){
+    // 	$("#mood").hide();
+	  // 	$("#mainQuestionArea").hide();
+	  // 	$("#resultsPage").show();
+    //   console.log("User reached the results");
+    //   console.log(restaurants);
+    //   console.log(entertainment);
+    //   console.log(shopping);
+		//
+    //   var couponPreference = "";
+    //   if (restaurants > 1) {
+    //     couponPreference = "restaurants";
+    //   }
+    //   if (entertainment > 1) {
+    //     couponPreference = "entertainment";
+    //   }
+    //   if (shopping > 1) {
+    //     couponPreference = "shopping";
+    //   }
+    //   $(".resultsLine").html("We see you like "+couponPreference+".<br> Here are some coupon suggestions to try something new!");
+    //   $(".broughtBy").html("This movie result was brought to you by XXXXX");
+		//
+    //  //  var queryURL = "https://api.themoviedb.org/3/movie/550?api_key=02109c05d4fdc8f5b547ae1daa004712/discover/movie/with_genre=action";
+    //  //  $.ajax({url: queryURL, method: 'GET'})
+    //  // .done(function(response) {
+    //  //    console.log(response);
+    //  //     var results = response.data;
+    //  // });
+    // }
+		//
+    // $(".a1").on('click',function(){
+    //   sportsInput();
+    // });
+		//
+    // $(".a2").on('click', function(){
+    //  	$("#mood").hide();
+	  // 	$("#mainQuestionArea").hide();
+	  // 	$("#resultsPage").show();
+	  // 	$(".resultsLine").html("We see you like some stand up!<br> Here are people coming to your area!");
+    //   $(".broughtBy").html("This movie result was brought to you by XXXXX");
+    // });
+		//
+    // $(".a3").on('click',function(){
+		// 		musicInput();
+    // });
   });
 
 
-pageLoad()
+pageLoad();
 
 /*function resetGame(){
   document.location.reload(true);
@@ -367,6 +465,3 @@ $(".startOver").on('click',function(){
 	  $("#mainQuestionArea").hide();
 	  $("#resultsPage").hide();
       });
-
-
-
