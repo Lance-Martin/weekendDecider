@@ -84,27 +84,21 @@ function pageLoad(){
       var genre = "";
       if (action > 1) {
         genre = "action";
-        category = 28;
       }
       if (drama > 1) {
         genre = "drama";
-        category = 18;
       }
       if (comedy > 1) {
         genre = "comedy";
-        category = 35;
       }
       $(".resultsLine").html("We see you like "+genre+" movies.<br> Time for some Netflix and Chill.");
-      $(".broughtBy").html("This movie result was brought to you by themoviedb.org");
+      $(".broughtBy").html("This movie result was brought to you by Netflix Roulette");
 
-    	var queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=02109c05d4fdc8f5b547ae1daa004712&with_genres="+category+"&sort_by=popularity.desc&include_adult=true";
+    	var queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=02109c05d4fdc8f5b547ae1daa004712&with_genres="+18+"&sort_by=popularity.desc&include_adult=true";
       $.ajax({url: queryURL, method: 'GET'})
      	.done(function(response) {
       console.log(response);
-      var randomNum = Math.floor((Math.random() * response.results.length) +1);
-      console.log(response.results[randomNum]);
-      var outcome = response.results[randomNum];
-      $(".apiResult").append("<img src=https://image.tmdb.org/t/p/w185/"+outcome.poster_path+">");
+      var results = response.data;
      });
     }
 
@@ -208,34 +202,22 @@ function pageLoad(){
       var couponPreference = "";
       if (restaurants > 1) {
         couponPreference = "restaurants";
-        category = "restaurants";
       }
       if (entertainment > 1) {
         couponPreference = "entertainment";
-        category = "activities-events";
       }
       if (shopping > 1) {
         couponPreference = "shopping";
-        category = "retail-services";
       }
       $(".resultsLine").html("We see you like "+couponPreference+".<br> Here are some coupon suggestions to try something new!");
-      $(".broughtBy").html("This coupon result was brought to you by Sqoot.com");
+      $(".broughtBy").html("This movie result was brought to you by XXXXX");
 
-      var queryURL = "http://api.sqoot.com/v2/deals?category_slugs="+category+"&api_key=olseu";
-      console.log(queryURL);
-      $.ajax({
-        url: queryURL, 
-        method:'GET',
-        dataType: 'jsonp'
-      }).done(function(response) {
-        console.log(response);
-        console.log("loggedresponse");
-        var randomNum = Math.floor((Math.random() * response.deals.length) +1);
-        console.log(response.deals[randomNum]);
-        var outcome = response.deals[randomNum];
-        console.log(outcome);
-        $(".apiResult").append(outcome.deal.description);
-     });
+     //  var queryURL = "https://api.themoviedb.org/3/movie/550?api_key=02109c05d4fdc8f5b547ae1daa004712/discover/movie/with_genre=action";
+     //  $.ajax({url: queryURL, method: 'GET'})
+     // .done(function(response) {
+     //    console.log(response);
+     //     var results = response.data;
+     // });
     }
 
     $(".a1").on('click',function(){
@@ -344,20 +326,23 @@ function pageLoad(){
 				genre = "country";
 				$('#mainQuestionArea').hide();
 				$('#resultsPage').show();
-				//add ajax call here
+				ajaxCall();
 			});
 			$('.a2').on('click',function(){
 				genre = "hip-hop";
 				$('#mainQuestionArea').hide();
 				$('#resultsPage').show();
-				//add ajax call here
+				ajaxCall();
 			});
 			$('.a3').on('click',function(){
 				genre = "rock";
 				$('#mainQuestionArea').hide();
 				$('#resultsPage').show();
-				//add ajax call here
+				ajaxCall();
 			});
+			function ajaxCall(){
+				//add ajax call here
+			}
 		});
 
 
@@ -456,9 +441,6 @@ function pageLoad(){
 
 pageLoad();
 
-/*function resetGame(){
-  document.location.reload(true);
-}; */
 
 $(".startOver").on('click',function(){
 	  $("#mood").show();
