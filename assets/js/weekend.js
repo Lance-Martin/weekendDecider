@@ -95,13 +95,16 @@ function pageLoad(){
         category = 35;
       }
       $(".resultsLine").html("We see you like "+genre+" movies.<br> Time for some Netflix and Chill.");
-      $(".broughtBy").html("This movie result was brought to you by Netflix Roulette");
+      $(".broughtBy").html("This movie result was brought to you by themoviedb.org");
 
     	var queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=02109c05d4fdc8f5b547ae1daa004712&with_genres="+category+"&sort_by=popularity.desc&include_adult=true";
       $.ajax({url: queryURL, method: 'GET'})
      	.done(function(response) {
       console.log(response);
-      var results = response.data;
+      var randomNum = Math.floor((Math.random() * response.results.length) +1);
+      console.log(response.results[randomNum]);
+      var outcome = response.results[randomNum];
+      $(".apiResult").append("<img src=https://image.tmdb.org/t/p/w185/"+outcome.poster_path+">");
      });
     }
 
