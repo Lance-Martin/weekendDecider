@@ -239,10 +239,10 @@ function pageLoad(){
         $(".title").append(outcome.deal.short_title);
         $(".apiResult").append("<img src="+outcome.deal.image_url+">");
         $(".apiResult").attr('id', "couponImage");
-        $(".apiResult").on('click',function(){
-            window.open(outcome.deal.untracked_url,'_blank');
+          $(".apiResult").on('click',function(){
+              window.open(outcome.deal.untracked_url,'_blank');
+            });
         });
-     });
     }
 
     $(".a1").on('click',function(){
