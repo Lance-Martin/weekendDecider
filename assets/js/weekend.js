@@ -27,7 +27,7 @@ function pageLoad(){
 //Function to reload the page when the user is finished with the quiz
 function resetPage(){
   document.location.reload(true);
-};
+}
 
 ///The onClick series that begins when lazy is clicked//
 	$(".lazyMood").click(function(){
@@ -249,7 +249,7 @@ function resetPage(){
       $(".timeTo").html("Time to try something new!");
 
 
-      var queryURL = "http://api.sqoot.com/v2/deals?category_slugs="+category+"&api_key=olseu";
+      var queryURL = "http://api.sqoot.com/v2/deals?category_slugs="+category+"&api_key=olseu&location="+latitude+","+longitude;
       console.log(queryURL);
       $.ajax({
         url: queryURL,
@@ -304,8 +304,9 @@ $(".ampedMood").click(function(){
     $('.text1').html('Sports, sports, sports');
     $('.text2').html('Show me some standup');
     $('.text3').html('Boom Boom Bass');
-		
-    $('.a1').on('click',function(){
+		$('.a1').on('click',function(){
+			$('.a1, .a2, .a3').off('click');
+			console.log("this click works");
         $('.questionAsked').html('<h1>Which Sport?</h1>');
 				$('.text1').html('MLB');
 				$('.text2').html('NFL');
@@ -314,7 +315,7 @@ $(".ampedMood").click(function(){
 					 sport = "mlb";
 					 $('#mainQuestionArea').empty();
 					 $('.questionAsked').html('<h1>Which Team?</h1>');
-					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3 a1" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width:90%;"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
+					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width:90%;"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
 
 					 $('button').on('click',function() {
 						 $('#mainQuestionArea').hide();
@@ -333,15 +334,12 @@ $(".ampedMood").click(function(){
 					 sport = "nfl";
 					 $('#mainQuestionArea').empty();
 					 $('.questionAsked').html('<h1>Which Team?</h1>');
-					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3 a1" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width: 90%"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
+					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width: 90%"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
 
 					 $('button').on('click',function() {
 						 $('#mainQuestionArea').hide();
 						 $('#resultsPage').show();
 						 var team = $('#team').val().trim();
-						 // $('#answers, #question, #instructions').empty();
-						 var queryURL = 'https://api.seatgeek.com/2/events?venue.state=TX';
-						 // $('#answers, #question, #instructions').empty();
 						 var queryURL = 'https://api.seatgeek.com/2/events?datetime_utc.gt=2012-09-07/performers?slug='+team;
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
@@ -353,14 +351,11 @@ $(".ampedMood").click(function(){
 					 sport = "nba";
 					 $('#mainQuestionArea').empty();
 					 $('.questionAsked').html('<h1>Which Team?</h1>');
-					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3 a1" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width: 90%;"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
+					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width: 90%;"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
 					 $('button').on('click',function() {
 						 $('#mainQuestionArea').hide();
 						 $('#resultsPage').show();
 						 var team = $('#team').val().trim();
-						 // $('#answers, #question, #instructions').empty();
-						 var queryURL = 'https://api.seatgeek.com/2/events?venue.state=TX';
-						 // $('#answers, #question, #instructions').empty();
 						 var queryURL = 'https://api.seatgeek.com/2/events?datetime_utc.gt=2012-09-07/performers?slug='+team;
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
@@ -369,7 +364,7 @@ $(".ampedMood").click(function(){
 					 });
 				});
 		});
-    
+
 		$('.a2').on('click',function(){
 			$('#mainQuestionArea').hide();
 			$('#resultsPage').show();

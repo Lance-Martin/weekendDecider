@@ -18,11 +18,11 @@
 	color: white;
 }
 
-.lazyMood:hover, .thriftyMood:hover, .ampedMood:hover { 
+.lazyMood:hover, .thriftyMood:hover, .ampedMood:hover {
   opacity: .7;
 }
 
-.a1:hover, .a2:hover, .a3:hover { 
+.a1:hover, .a2:hover, .a3:hover {
   opacity: .7;
 }
 
@@ -35,7 +35,7 @@
   height: 75px;
   clear:both;
   background-color: #00c8f8;
-} 
+}
 
 
 #mainQuestionArea {
@@ -52,4 +52,8 @@
 
 div.col-lg-12.apiResult{
   text-align:center;
+}
+
+#remove:hover {
+  opacity: 1;
 }
