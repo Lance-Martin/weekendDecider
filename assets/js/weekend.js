@@ -324,6 +324,15 @@ $(".ampedMood").click(function(){
 						 var queryURL = 'https://api.seatgeek.com/2/performers?q='+team;
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
+                $('.title').append(response.performers[0].name);
+                $('.apiResult').append();
+                $(".timeTo").html("Enjoy the game!");
+                $(".broughtBy").html("Click your result to find out more.<br>This result was brought to you by SeatGeek.com");
+                $(".title").attr('id', "couponImage");
+                $(".title").on('click',function(){
+                    window.open(response.performers[0].url,'_blank');
+             });
+
 						 });
 						 return false;
 					 });
@@ -341,6 +350,15 @@ $(".ampedMood").click(function(){
 						 var queryURL = 'https://api.seatgeek.com/2/performers?q='+team;
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
+                $('.title').append(response.performers[0].name);
+                $('.apiResult').append();
+                $(".timeTo").html("Enjoy the game!");
+                $(".broughtBy").html("Click your result to find out more.<br>This result was brought to you by SeatGeek.com");
+                $(".title").attr('id', "couponImage");
+                $(".title").on('click',function(){
+                    window.open(response.performers[0].url,'_blank');
+             });
+
 						 });
 						 return false;
 					 });
@@ -357,6 +375,14 @@ $(".ampedMood").click(function(){
 						 var queryURL = 'https://api.seatgeek.com/2/performers?q='+team;
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
+                $('.title').append(response.performers[0].name);
+                $('.apiResult').append();
+                $(".timeTo").html("Enjoy the game!");
+                $(".broughtBy").html("Click your result to find out more.<br>This result was brought to you by SeatGeek.com");
+                $(".title").attr('id', "couponImage");
+                $(".title").on('click',function(){
+                    window.open(response.performers[0].url,'_blank');
+             });
 						 });
 						 return false;
 					 });
@@ -367,7 +393,7 @@ $(".ampedMood").click(function(){
 			$('#mainQuestionArea').hide();
 			$('#resultsPage').show();
       $(".timeTo").html("Enjoy the show!");
-      $(".broughtBy").html("Click your result to find out more.<br>This coupon result was brought to you by SeatGeek.com");
+      $(".broughtBy").html("Click your result to find out more.<br>This result was brought to you by SeatGeek.com");
 			var queryURL = 'https://api.seatgeek.com/2/events?q=comedy&lat='+latitude+"&lon="+longitude;
 			$.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 				console.log(response);
@@ -411,12 +437,15 @@ $(".ampedMood").click(function(){
 					var randomNum = Math.floor((Math.random() * response.events.length) +1);
 					$('.title').append(response.events[randomNum].title);
 					$('.apiResult').append();
+          $(".timeTo").html("Enjoy the show!");
+          $(".broughtBy").html("Click your result to find out more.<br>This result was brought to you by SeatGeek.com");
 					$(".title").attr('id', "couponImage");
 	        $(".title").on('click',function(){
 	             window.open(response.events[randomNum].url,'_blank');
 	           });
 				});
 			}
+
 		});
   });
 
