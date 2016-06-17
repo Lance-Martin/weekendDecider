@@ -299,7 +299,8 @@ $(".ampedMood").click(function(){
     $('.text1').html('Sports, sports, sports');
     $('.text2').html('Show me some standup');
     $('.text3').html('Boom Boom Bass');
-		$('.a1').on('click',function(){
+		
+    $('.a1').on('click',function(){
 			console.log("this click works");
         $('.questionAsked').html('<h1>Which Sport?</h1>');
 				$('.text1').html('MLB');
@@ -315,7 +316,7 @@ $(".ampedMood").click(function(){
 						 $('#mainQuestionArea').hide();
 						 $('#resultsPage').show();
 						 var team = $('#team').val().trim();
-						 $('#answers, #question, #instructions').empty();
+						 // $('#answers, #question, #instructions').empty();
 						 //need to change ajax call
 						 var queryURL = 'https://api.seatgeek.com/2/events?venue.state=TX';
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
@@ -334,7 +335,7 @@ $(".ampedMood").click(function(){
 						 $('#mainQuestionArea').hide();
 						 $('#resultsPage').show();
 						 var team = $('#team').val().trim();
-						 $('#answers, #question, #instructions').empty();
+						 // $('#answers, #question, #instructions').empty();
 						 var queryURL = 'https://api.seatgeek.com/2/events?venue.state=TX';
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
@@ -352,7 +353,7 @@ $(".ampedMood").click(function(){
 						 $('#mainQuestionArea').hide();
 						 $('#resultsPage').show();
 						 var team = $('#team').val().trim();
-						 $('#answers, #question, #instructions').empty();
+						 // $('#answers, #question, #instructions').empty();
 						 var queryURL = 'https://api.seatgeek.com/2/events?venue.state=TX';
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
@@ -361,6 +362,7 @@ $(".ampedMood").click(function(){
 					 });
 				});
 		});
+    
 		$('.a2').on('click',function(){
 			$('#mainQuestionArea').hide();
 			$('#resultsPage').show();
