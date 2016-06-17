@@ -245,7 +245,7 @@ function resetPage(){
         category = "retail-services";
       }
 
-      $(".broughtBy").html("This coupon result was brought to you by Sqoot.com");
+      $(".broughtBy").html("Click the image to find out more. <br><br>This coupon result was brought to you by Sqoot.com");
       $(".timeTo").html("Time to try something new!");
 
 
@@ -266,7 +266,7 @@ function resetPage(){
         $(".title").append(outcome.deal.short_title);
         $(".apiResult").append("<img src="+outcome.deal.image_url+">");
         $(".apiResult").attr('id', "couponImage");
-          $(".apiResult").on('click',function(){
+        $(".apiResult").on('click',function(){
               window.open(outcome.deal.untracked_url,'_blank');
             });
         });
@@ -321,7 +321,7 @@ $(".ampedMood").click(function(){
 						 $('#mainQuestionArea').hide();
 						 $('#resultsPage').show();
 						 var team = $('#team').val().trim();
-						 $('#answers, #question, #instructions').empty();
+						 // $('#answers, #question, #instructions').empty();
 						 //need to change ajax call
 						 var queryURL = 'https://api.seatgeek.com/2/events?datetime_utc.gt=2016-06-06/performers?slug='+team;
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
@@ -340,7 +340,6 @@ $(".ampedMood").click(function(){
 						 $('#mainQuestionArea').hide();
 						 $('#resultsPage').show();
 						 var team = $('#team').val().trim();
-						 $('#answers, #question, #instructions').empty();
 						 var queryURL = 'https://api.seatgeek.com/2/events?datetime_utc.gt=2012-09-07/performers?slug='+team;
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
@@ -357,7 +356,6 @@ $(".ampedMood").click(function(){
 						 $('#mainQuestionArea').hide();
 						 $('#resultsPage').show();
 						 var team = $('#team').val().trim();
-						 $('#answers, #question, #instructions').empty();
 						 var queryURL = 'https://api.seatgeek.com/2/events?datetime_utc.gt=2012-09-07/performers?slug='+team;
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
@@ -366,6 +364,7 @@ $(".ampedMood").click(function(){
 					 });
 				});
 		});
+
 		$('.a2').on('click',function(){
 			$('#mainQuestionArea').hide();
 			$('#resultsPage').show();
