@@ -1,3 +1,25 @@
+var longitude = "";
+var latitude = "";
+if (navigator.geolocation) {
+ console.log('Geolocation is supported!');
+
+}
+else {
+ console.log('Geolocation is not supported for this Browser/OS version yet.');
+}
+
+window.onload = function() {
+ var startPos;
+ var geoSuccess = function(position) {
+   startPos = position;
+    latitude = startPos.coords.latitude;
+    longitude = startPos.coords.longitude;
+         console.log(latitude);
+         console.log(longitude);
+ };
+ navigator.geolocation.getCurrentPosition(geoSuccess);
+};
+
 function pageLoad(){
 	$("#mainQuestionArea").hide();
 	}
