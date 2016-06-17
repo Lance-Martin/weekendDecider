@@ -1,3 +1,25 @@
+var longitude = "";
+var latitude = "";
+if (navigator.geolocation) {
+  console.log('Geolocation is supported!');
+
+}
+else {
+  console.log('Geolocation is not supported for this Browser/OS version yet.');
+}
+
+window.onload = function() {
+  var startPos;
+  var geoSuccess = function(position) {
+    startPos = position;
+     latitude = startPos.coords.latitude;
+     longitude = startPos.coords.longitude;
+		 console.log(latitude);
+		 console.log(longitude);
+  };
+  navigator.geolocation.getCurrentPosition(geoSuccess);
+};
+
 function pageLoad(){
 	$("#mainQuestionArea").hide();
 	}
@@ -277,7 +299,7 @@ $(".ampedMood").click(function(){
 					 sport = "mlb";
 					 $('#mainQuestionArea').empty();
 					 $('.questionAsked').html('<h1>Which Team?</h1>');
-					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3 a1" style = "text-align: center;"><form><div class ="forum-group"><label for ="">Type a team name</label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px;"><br><button type="submit" class="btn btn-primary">Submit</button></div></form></div></div>');
+					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3 a1" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width:90%;"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
 
 					 $('button').on('click',function() {
 						 $('#mainQuestionArea').hide();
@@ -285,7 +307,7 @@ $(".ampedMood").click(function(){
 						 var team = $('#team').val().trim();
 						 $('#answers, #question, #instructions').empty();
 						 //need to change ajax call
-						 var queryURL = 'https://api.seatgeek.com/2/events?venue.state=TX';
+						 var queryURL = 'https://api.seatgeek.com/2/events?datetime_utc.gt=2016-06-06/performers?slug='+team;
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
 						 });
@@ -296,14 +318,14 @@ $(".ampedMood").click(function(){
 					 sport = "nfl";
 					 $('#mainQuestionArea').empty();
 					 $('.questionAsked').html('<h1>Which Team?</h1>');
-					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3 a1" style = "text-align: center;"><form><div class ="forum-group"><label for ="">Type a team name</label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px;"><br><button type="submit" class="btn btn-primary">Submit</button></div></form></div></div>');
+					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3 a1" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width: 90%"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
 
 					 $('button').on('click',function() {
 						 $('#mainQuestionArea').hide();
 						 $('#resultsPage').show();
 						 var team = $('#team').val().trim();
 						 $('#answers, #question, #instructions').empty();
-						 var queryURL = 'https://api.seatgeek.com/2/events?venue.state=TX';
+						 var queryURL = 'https://api.seatgeek.com/2/events?datetime_utc.gt=2012-09-07/performers?slug='+team;
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
 						 });
@@ -311,17 +333,16 @@ $(".ampedMood").click(function(){
 					 });
 				});
 				$('.a3').on('click',function() {
-					 sport = "nfl";
+					 sport = "nba";
 					 $('#mainQuestionArea').empty();
 					 $('.questionAsked').html('<h1>Which Team?</h1>');
-					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3 a1" style = "text-align: center;"><form><div class ="forum-group"><label for ="">Type a team name</label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px;"><br><button type="submit" class="btn btn-primary">Submit</button></div></form></div></div>');
-
+					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3 a1" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width: 90%;"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
 					 $('button').on('click',function() {
 						 $('#mainQuestionArea').hide();
 						 $('#resultsPage').show();
 						 var team = $('#team').val().trim();
 						 $('#answers, #question, #instructions').empty();
-						 var queryURL = 'https://api.seatgeek.com/2/events?venue.state=TX';
+						 var queryURL = 'https://api.seatgeek.com/2/events?datetime_utc.gt=2012-09-07/performers?slug='+team;
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
 						 });
@@ -340,25 +361,28 @@ $(".ampedMood").click(function(){
 			$('.text2').html('Hip-hop');
 			$('.text3').html('Rock');
 			$('.a1').on('click',function(){
-				genre = "country";
+				musicGenre = "country";
 				$('#mainQuestionArea').hide();
 				$('#resultsPage').show();
 				ajaxCall();
 			});
 			$('.a2').on('click',function(){
-				genre = "hip-hop";
+				musicGenre = "hip-hop";
 				$('#mainQuestionArea').hide();
 				$('#resultsPage').show();
 				ajaxCall();
 			});
 			$('.a3').on('click',function(){
-				genre = "rock";
+				musicGenre = "rock";
 				$('#mainQuestionArea').hide();
 				$('#resultsPage').show();
 				ajaxCall();
 			});
 			function ajaxCall(){
-				//add ajax call here
+				var queryURL = "https://api.seatgeek.com/2/performers?genres.slug="+musicGenre+"/events?datetime_utc.gt=2015-06-06";
+				$.ajax({url: queryURL ,method: 'GET'}).done(function(response){
+					console.log(response);
+				});
 			}
 		});
   });
