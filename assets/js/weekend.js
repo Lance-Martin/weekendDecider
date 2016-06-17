@@ -24,6 +24,11 @@ function pageLoad(){
 	$("#mainQuestionArea").hide();
 	}
 
+//Function to reload the page when the user is finished with the quiz
+function resetPage(){
+  document.location.reload(true);
+};
+
 ///The onClick series that begins when lazy is clicked//
 	$(".lazyMood").click(function(){
 	  $("#mood").hide();
@@ -400,11 +405,9 @@ $(".ampedMood").click(function(){
 
 pageLoad();
 
-/*function resetGame(){
-  document.location.reload(true);
-}; */
-
+//When the user is finished, they can click the Get me a new plan button, which reloads the page and brings them directly to the mood selector and bypasses the initial Plan my Weekend button.
 $(".startOver").on('click',function(){
+    resetPage();
 	  $("#mood").show();
 	  $("#mainQuestionArea").hide();
 	  $("#resultsPage").hide();
