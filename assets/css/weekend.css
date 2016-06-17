@@ -26,6 +26,10 @@
   opacity: .7;
 }
 
+#couponImage:hover {
+  opacity: .7;
+}
+
 .footer {
   position: relative;
   height: 75px;

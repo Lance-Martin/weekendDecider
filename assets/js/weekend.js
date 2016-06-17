@@ -1,3 +1,24 @@
+var longitude = "";
+var latitude = "";
+if (navigator.geolocation) {
+  console.log('Geolocation is supported!');
+
+}
+else {
+  console.log('Geolocation is not supported for this Browser/OS version yet.');
+}
+
+window.onload = function() {
+ var startPos;
+ var geoSuccess = function(position) {
+   startPos = position;
+    latitude = startPos.coords.latitude;
+    longitude = startPos.coords.longitude;
+         console.log(latitude);
+         console.log(longitude);
+ };
+ navigator.geolocation.getCurrentPosition(geoSuccess);
+};
 
 function pageLoad(){
 	$("#mainQuestionArea").hide();
@@ -12,11 +33,12 @@ function resetPage(){
 	$(".lazyMood").click(function(){
 	  $("#mood").hide();
 	  $("#mainQuestionArea").show();
+    $(".ampedABC").hide();
+    $(".couponABC").hide();
 	  var action = 0;
     var drama = 0;
     var comedy = 0;
     var q = 1;
-    // $(".a1,.a2,.a3").attr('id', 'netflixAnswers');
     $(".questionAsked").html("What's the best way to<br> say bye to a comrade?");
     $(".questionNumber").html("Question "+q+" of 4");
     $(".text1").html("Hasta La Vista");
@@ -24,7 +46,6 @@ function resetPage(){
     $(".text3").html("Take care now,<br> bye bye then");
 
     function question2() {
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
       $(".questionAsked").html("Zombie apocalypse! <br>Which item would you <br>choose to defend yourself?");
       $(".questionNumber").html("Question "+q+" of 4");
       $(".text1").html("Machine gun");
@@ -42,8 +63,7 @@ function resetPage(){
     }
 
     function question3(){
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
-      $(".questionAsked").html("What’s your choice of transportation?");
+      $(".questionAsked").html("What’s your choice<br> of transportation?");
       $(".questionNumber").html("Question "+q+" of 4");
       $(".text1").html("Batmobile");
     	$(".text2").html("Horse Drawn Carriage");
@@ -60,7 +80,6 @@ function resetPage(){
     }
 
     function question4() {
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
       $(".questionAsked").html("Where do you want to eat at?");
       $(".questionNumber").html("Question "+q+" of 4");
       $(".text1").html("Pizza Planet");
@@ -99,8 +118,9 @@ function resetPage(){
         genre = "comedy";
         category = 35;
       }
-      $(".resultsLine").html("We see you like "+genre+" movies.<br> Time for some Netflix and Chill.");
-      $(".broughtBy").html("This movie result was brought to you by themoviedb.org");
+
+      $(".broughtBy").html("This "+genre+" movie result was<br> brought to you by themoviedb.org");
+      $(".timeTo").html("Time for Netflix & chill");
 
     	var queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=02109c05d4fdc8f5b547ae1daa004712&with_genres="+category+"&sort_by=popularity.desc&include_adult=true";
       $.ajax({url: queryURL, method: 'GET'})
@@ -110,6 +130,8 @@ function resetPage(){
       console.log(response.results[randomNum]);
       var outcome = response.results[randomNum];
       $(".apiResult").append("<img src=https://image.tmdb.org/t/p/w185/"+outcome.poster_path+">");
+      $(".resultsLine").html("We see you like "+genre+" movies. Kick back and relax.<br> We suggest you watch:");
+      $(".title").append(outcome.original_title);
      });
     }
 
@@ -137,6 +159,8 @@ function resetPage(){
 	$(".thriftyMood").click(function(){
 	  $("#mood").hide();
 	  $("#mainQuestionArea").show();
+    $(".ampedABC").hide();
+    $(".movieABC").hide();
 	  var restaurants = 0;
     var entertainment = 0;
     var shopping = 0;
@@ -148,7 +172,6 @@ function resetPage(){
     $(".text3").html("Shopping spree");
 
     function question2() {
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
       $(".questionAsked").html("You are granted a lifetime supply<br> of one of the items below.<br> Which would it be?");
       $(".questionNumber").html("Question "+q+" of 4");
       $(".text1").html("Steak dinners");
@@ -166,7 +189,6 @@ function resetPage(){
     }
 
     function question3(){
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
       $(".questionAsked").html("What best suits your personality?");
       $(".questionNumber").html("Question "+q+" of 4");
       $(".text1").html("Being catered to");
@@ -184,7 +206,6 @@ function resetPage(){
     }
 
     function question4() {
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
       $(".questionAsked").html("If you could sum up your daily thoughts<br> in one word, what would it be?");
       $(".questionNumber").html("Question "+q+" of 4");
       $(".text1").html("Hungry");
@@ -223,13 +244,15 @@ function resetPage(){
         couponPreference = "shopping";
         category = "retail-services";
       }
-      $(".resultsLine").html("We see you like "+couponPreference+".<br> Here are some coupon suggestions to try something new!");
+
       $(".broughtBy").html("This coupon result was brought to you by Sqoot.com");
+      $(".timeTo").html("Time to try something new!");
+
 
       var queryURL = "http://api.sqoot.com/v2/deals?category_slugs="+category+"&api_key=olseu";
       console.log(queryURL);
       $.ajax({
-        url: queryURL, 
+        url: queryURL,
         method:'GET',
         dataType: 'jsonp'
       }).done(function(response) {
@@ -239,8 +262,14 @@ function resetPage(){
         console.log(response.deals[randomNum]);
         var outcome = response.deals[randomNum];
         console.log(outcome);
-        $(".apiResult").append(outcome.deal.description);
-     });
+        $(".resultsLine").html("We see you like "+couponPreference+".<br> Be your thrifty self and try out this deal!");
+        $(".title").append(outcome.deal.short_title);
+        $(".apiResult").append("<img src="+outcome.deal.image_url+">");
+        $(".apiResult").attr('id', "couponImage");
+          $(".apiResult").on('click',function(){
+              window.open(outcome.deal.untracked_url,'_blank');
+            });
+        });
     }
 
     $(".a1").on('click',function(){
@@ -266,102 +295,115 @@ function resetPage(){
 
 ///The onClick series that begins when Amped is clicked
 
-	$(".ampedMood").click(function(){
+$(".ampedMood").click(function(){
 	  $("#mood").hide();
 	  $("#mainQuestionArea").show();
-	  var restaurants = 0;
-    var entertainment = 0;
-    var shopping = 0;
-    // $(".a1,.a2,.a3").attr('id', 'netflixAnswers');
-    $(".questionAsked").html("What sounds most appealing?");
-    // $(".questionNumber").html("Question "+q+" of 4");
-    $(".text1").html("Sports, Sports, Sports");
-    $(".text2").html("Show Me Some Standup");
-    $(".text3").html("Dat Boom Boom Bass");
+    $(".movieABC").hide();
+    $(".couponABC").hide();
+		$('.questionAsked').html('<h1>Which is most appealing?</h1>');
+    $('.text1').html('Sports, sports, sports');
+    $('.text2').html('Show me some standup');
+    $('.text3').html('Boom Boom Bass');
+		$('.a1').on('click',function(){
+			console.log("this click works");
+        $('.questionAsked').html('<h1>Which Sport?</h1>');
+				$('.text1').html('MLB');
+				$('.text2').html('NFL');
+				$('.text3').html('NBA');
+				$('.a1').on('click',function() {
+					 sport = "mlb";
+					 $('#mainQuestionArea').empty();
+					 $('.questionAsked').html('<h1>Which Team?</h1>');
+					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3 a1" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width:90%;"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
 
-    function sportsInput() {
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
-      $(".questionAsked").html("Which league are you most interested in?");
-      $(".text1").html("NFL");
-    	$(".text2").html("MLB");
-    	$(".text3").html("NBA");
-      // $(".a1").on('click',function(){
-      //   question3();
-      // });
-      // $(".a2").on('click',function(){
-      //   question3();
-      // });
-      // $(".a3").on('click',function(){
-      //   question3();
-      // });
-    }
+					 $('button').on('click',function() {
+						 $('#mainQuestionArea').hide();
+						 $('#resultsPage').show();
+						 var team = $('#team').val().trim();
+						 $('#answers, #question, #instructions').empty();
+						 //need to change ajax call
+						 var queryURL = 'https://api.seatgeek.com/2/events?datetime_utc.gt=2016-06-06/performers?slug='+team;
+						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
+							 console.log(response);
+						 });
+						 return false;
+					 });
+				});
+				$('.a2').on('click',function() {
+					 sport = "nfl";
+					 $('#mainQuestionArea').empty();
+					 $('.questionAsked').html('<h1>Which Team?</h1>');
+					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3 a1" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width: 90%"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
 
-    function musicInput(){
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
-      $(".questionAsked").html("What genre instrests you the most?");
-      $(".text1").html("Country");
-    	$(".text2").html("Pop");
-    	$(".text3").html("Rock");
-      $(".a1").on('click',function(){
-        question4();
-      });
-      $(".a2").on('click',function(){
-        question4();
-      });
-      $(".a3").on('click',function(){
-        question4();
-      });
-    }
+					 $('button').on('click',function() {
+						 $('#mainQuestionArea').hide();
+						 $('#resultsPage').show();
+						 var team = $('#team').val().trim();
+						 $('#answers, #question, #instructions').empty();
+						 var queryURL = 'https://api.seatgeek.com/2/events?datetime_utc.gt=2012-09-07/performers?slug='+team;
+						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
+							 console.log(response);
+						 });
+						 return false;
+					 });
+				});
+				$('.a3').on('click',function() {
+					 sport = "nba";
+					 $('#mainQuestionArea').empty();
+					 $('.questionAsked').html('<h1>Which Team?</h1>');
+					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3 a1" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width: 90%;"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
+					 $('button').on('click',function() {
+						 $('#mainQuestionArea').hide();
+						 $('#resultsPage').show();
+						 var team = $('#team').val().trim();
+						 $('#answers, #question, #instructions').empty();
+						 var queryURL = 'https://api.seatgeek.com/2/events?datetime_utc.gt=2012-09-07/performers?slug='+team;
+						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
+							 console.log(response);
+						 });
+						 return false;
+					 });
+				});
+		});
+		$('.a2').on('click',function(){
+			$('#mainQuestionArea').hide();
+			$('#resultsPage').show();
+		});
 
-    function results(){
-    	$("#mood").hide();
-	  	$("#mainQuestionArea").hide();
-	  	$("#resultsPage").show();
-      console.log("User reached the results");
-      console.log(restaurants);
-      console.log(entertainment);
-      console.log(shopping);
-
-      var couponPreference = "";
-      if (restaurants > 1) {
-        couponPreference = "restaurants";
-      }
-      if (entertainment > 1) {
-        couponPreference = "entertainment";
-      }
-      if (shopping > 1) {
-        couponPreference = "shopping";
-      }
-      $(".resultsLine").html("We see you like "+couponPreference+".<br> Here are some coupon suggestions to try something new!");
-      $(".broughtBy").html("This movie result was brought to you by XXXXX");
-
-     //  var queryURL = "https://api.themoviedb.org/3/movie/550?api_key=02109c05d4fdc8f5b547ae1daa004712/discover/movie/with_genre=action";
-     //  $.ajax({url: queryURL, method: 'GET'})
-     // .done(function(response) {
-     //    console.log(response);
-     //     var results = response.data;
-     // });
-    }
-
-    $(".a1").on('click',function(){
-      sportsInput();
-    });
-
-    $(".a2").on('click', function(){
-     	$("#mood").hide();
-	  	$("#mainQuestionArea").hide();
-	  	$("#resultsPage").show();;
-	  	$(".resultsLine").html("We see you like some stand up!<br> Here are people coming to your area!");
-      $(".broughtBy").html("This movie result was brought to you by XXXXX");
-    });
-
-    $(".a3").on('click',function(){
-				musicInput();
-    });
+		$('.a3').on('click',function(){
+			$('.questionAsked').html('<h1>Which Genre?</h1>');
+			$('.text1').html('Country');
+			$('.text2').html('Hip-hop');
+			$('.text3').html('Rock');
+			$('.a1').on('click',function(){
+				musicGenre = "country";
+				$('#mainQuestionArea').hide();
+				$('#resultsPage').show();
+				ajaxCall();
+			});
+			$('.a2').on('click',function(){
+				musicGenre = "hip-hop";
+				$('#mainQuestionArea').hide();
+				$('#resultsPage').show();
+				ajaxCall();
+			});
+			$('.a3').on('click',function(){
+				musicGenre = "rock";
+				$('#mainQuestionArea').hide();
+				$('#resultsPage').show();
+				ajaxCall();
+			});
+			function ajaxCall(){
+				var queryURL = "https://api.seatgeek.com/2/performers?genres.slug="+musicGenre+"/events?datetime_utc.gt=2015-06-06";
+				$.ajax({url: queryURL ,method: 'GET'}).done(function(response){
+					console.log(response);
+				});
+			}
+		});
   });
 
 
-pageLoad()
+pageLoad();
 
 //When the user is finished, they can click the Get me a new plan button, which reloads the page and brings them directly to the mood selector and bypasses the initial Plan my Weekend button.
 $(".startOver").on('click',function(){
@@ -370,6 +412,3 @@ $(".startOver").on('click',function(){
 	  $("#mainQuestionArea").hide();
 	  $("#resultsPage").hide();
       });
-
-
-
