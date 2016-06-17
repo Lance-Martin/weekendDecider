@@ -242,7 +242,7 @@ function resetPage(){
       }
       if (shopping > 1) {
         couponPreference = "shopping";
-        category = "retail-services";
+        category = "treats";
       }
 
       $(".broughtBy").html("Click the image to find out more. <br><br>This coupon result was brought to you by Sqoot.com");
@@ -315,7 +315,7 @@ $(".ampedMood").click(function(){
 					 sport = "mlb";
 					 $('#mainQuestionArea').empty();
 					 $('.questionAsked').html('<h1>Which Team?</h1>');
-					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width:90%;"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
+					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1><h5>Example: Philadelphia Phillies</h5></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width:90%;"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
 
 					 $('button').on('click',function() {
 						 $('#mainQuestionArea').hide();
@@ -323,7 +323,7 @@ $(".ampedMood").click(function(){
 						 var team = $('#team').val().trim();
 						 // $('#answers, #question, #instructions').empty();
 						 //need to change ajax call
-						 var queryURL = 'https://api.seatgeek.com/2/events?datetime_utc.gt=2016-06-06/performers?slug='+team;
+						 var queryURL = 'https://api.seatgeek.com/2/performers?q='+team;
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
 						 });
@@ -334,13 +334,13 @@ $(".ampedMood").click(function(){
 					 sport = "nfl";
 					 $('#mainQuestionArea').empty();
 					 $('.questionAsked').html('<h1>Which Team?</h1>');
-					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width: 90%"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
+					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1><h5>Example: Cleveland Browns</h5></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width: 90%"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
 
 					 $('button').on('click',function() {
 						 $('#mainQuestionArea').hide();
 						 $('#resultsPage').show();
 						 var team = $('#team').val().trim();
-						 var queryURL = 'https://api.seatgeek.com/2/events?datetime_utc.gt=2012-09-07/performers?slug='+team;
+						 var queryURL = 'https://api.seatgeek.com/2/performers?q='+team;
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
 						 });
@@ -351,12 +351,12 @@ $(".ampedMood").click(function(){
 					 sport = "nba";
 					 $('#mainQuestionArea').empty();
 					 $('.questionAsked').html('<h1>Which Team?</h1>');
-					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width: 90%;"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
+					 $('#mainQuestionArea').html('<div class = "row"><div class = "col-md-6 col-md-offset-3" style = "text-align: center;"><form><div class ="forum-group"><label for =""><h1>Type a team name</h1><h5>Example: San Antonio Spurs</h5></label></div><input id = "team" type = "text" style ="color: black; margin-bottom: 10px; width: 90%;"><br><button type="submit" class="btn" style = "width:150px; height: 70px; background-color:#00c8f8;"><h3>Submit</h3></button></div></form></div></div>');
 					 $('button').on('click',function() {
 						 $('#mainQuestionArea').hide();
 						 $('#resultsPage').show();
 						 var team = $('#team').val().trim();
-						 var queryURL = 'https://api.seatgeek.com/2/events?datetime_utc.gt=2012-09-07/performers?slug='+team;
+						 var queryURL = 'https://api.seatgeek.com/2/performers?q='+team;
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
 						 });
@@ -368,6 +368,17 @@ $(".ampedMood").click(function(){
 		$('.a2').on('click',function(){
 			$('#mainQuestionArea').hide();
 			$('#resultsPage').show();
+			var queryURL = 'https://api.seatgeek.com/2/events?q=comedy&lat='+latitude+"&lon="+longitude;
+			$.ajax({url: queryURL, method: 'GET'}).done(function(response) {
+				console.log(response);
+				var randomNum = Math.floor((Math.random() * response.events.length) +1);
+				$('.title').append(response.events[randomNum].title);
+				$('.apiResult').append();
+				$(".title").attr('id', "couponImage");
+        $(".title").on('click',function(){
+             window.open(response.events[randomNum].url,'_blank');
+           });
+						});
 		});
 
 		$('.a3').on('click',function(){
@@ -394,9 +405,16 @@ $(".ampedMood").click(function(){
 				ajaxCall();
 			});
 			function ajaxCall(){
-				var queryURL = "https://api.seatgeek.com/2/performers?genres.slug="+musicGenre+"/events?datetime_utc.gt=2015-06-06";
+				var queryURL = "https://api.seatgeek.com/2/events?q="+musicGenre+"&lat="+latitude+"&lon="+longitude;
 				$.ajax({url: queryURL ,method: 'GET'}).done(function(response){
 					console.log(response);
+					var randomNum = Math.floor((Math.random() * response.events.length) +1);
+					$('.title').append(response.events[randomNum].title);
+					$('.apiResult').append();
+					$(".title").attr('id', "couponImage");
+	        $(".title").on('click',function(){
+	             window.open(response.events[randomNum].url,'_blank');
+	           });
 				});
 			}
 		});
