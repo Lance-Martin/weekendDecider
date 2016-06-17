@@ -1,3 +1,25 @@
+var longitude = "";
+var latitude = "";
+if (navigator.geolocation) {
+ console.log('Geolocation is supported!');
+
+}
+else {
+ console.log('Geolocation is not supported for this Browser/OS version yet.');
+}
+
+window.onload = function() {
+ var startPos;
+ var geoSuccess = function(position) {
+   startPos = position;
+    latitude = startPos.coords.latitude;
+    longitude = startPos.coords.longitude;
+         console.log(latitude);
+         console.log(longitude);
+ };
+ navigator.geolocation.getCurrentPosition(geoSuccess);
+};
+
 function pageLoad(){
 	$("#mainQuestionArea").hide();
 	}
@@ -6,11 +28,12 @@ function pageLoad(){
 	$(".lazyMood").click(function(){
 	  $("#mood").hide();
 	  $("#mainQuestionArea").show();
+    $(".ampedABC").hide();
+    $(".couponABC").hide();
 	  var action = 0;
     var drama = 0;
     var comedy = 0;
     var q = 1;
-    // $(".a1,.a2,.a3").attr('id', 'netflixAnswers');
     $(".questionAsked").html("What's the best way to<br> say bye to a comrade?");
     $(".questionNumber").html("Question "+q+" of 4");
     $(".text1").html("Hasta La Vista");
@@ -18,7 +41,6 @@ function pageLoad(){
     $(".text3").html("Take care now,<br> bye bye then");
 
     function question2() {
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
       $(".questionAsked").html("Zombie apocalypse! <br>Which item would you <br>choose to defend yourself?");
       $(".questionNumber").html("Question "+q+" of 4");
       $(".text1").html("Machine gun");
@@ -36,8 +58,7 @@ function pageLoad(){
     }
 
     function question3(){
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
-      $(".questionAsked").html("What’s your choice of transportation?");
+      $(".questionAsked").html("What’s your choice<br> of transportation?");
       $(".questionNumber").html("Question "+q+" of 4");
       $(".text1").html("Batmobile");
     	$(".text2").html("Horse Drawn Carriage");
@@ -54,7 +75,6 @@ function pageLoad(){
     }
 
     function question4() {
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
       $(".questionAsked").html("Where do you want to eat at?");
       $(".questionNumber").html("Question "+q+" of 4");
       $(".text1").html("Pizza Planet");
@@ -93,8 +113,9 @@ function pageLoad(){
         genre = "comedy";
         category = 35;
       }
-      $(".resultsLine").html("We see you like "+genre+" movies.<br> Time for some Netflix and Chill.");
-      $(".broughtBy").html("This movie result was brought to you by themoviedb.org");
+
+      $(".broughtBy").html("This "+genre+" movie result was<br> brought to you by themoviedb.org");
+      $(".timeTo").html("Time for Netflix & chill");
 
     	var queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=02109c05d4fdc8f5b547ae1daa004712&with_genres="+category+"&sort_by=popularity.desc&include_adult=true";
       $.ajax({url: queryURL, method: 'GET'})
@@ -104,6 +125,8 @@ function pageLoad(){
       console.log(response.results[randomNum]);
       var outcome = response.results[randomNum];
       $(".apiResult").append("<img src=https://image.tmdb.org/t/p/w185/"+outcome.poster_path+">");
+      $(".resultsLine").html("We see you like "+genre+" movies. Kick back and relax.<br> We suggest you watch:");
+      $(".title").append(outcome.original_title);
      });
     }
 
@@ -131,6 +154,8 @@ function pageLoad(){
 	$(".thriftyMood").click(function(){
 	  $("#mood").hide();
 	  $("#mainQuestionArea").show();
+    $(".ampedABC").hide();
+    $(".movieABC").hide();
 	  var restaurants = 0;
     var entertainment = 0;
     var shopping = 0;
@@ -142,7 +167,6 @@ function pageLoad(){
     $(".text3").html("Shopping spree");
 
     function question2() {
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
       $(".questionAsked").html("You are granted a lifetime supply<br> of one of the items below.<br> Which would it be?");
       $(".questionNumber").html("Question "+q+" of 4");
       $(".text1").html("Steak dinners");
@@ -160,7 +184,6 @@ function pageLoad(){
     }
 
     function question3(){
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
       $(".questionAsked").html("What best suits your personality?");
       $(".questionNumber").html("Question "+q+" of 4");
       $(".text1").html("Being catered to");
@@ -178,7 +201,6 @@ function pageLoad(){
     }
 
     function question4() {
-      // $(".a1,.a2,.a3, #instructions, #question").empty();
       $(".questionAsked").html("If you could sum up your daily thoughts<br> in one word, what would it be?");
       $(".questionNumber").html("Question "+q+" of 4");
       $(".text1").html("Hungry");
@@ -217,8 +239,10 @@ function pageLoad(){
         couponPreference = "shopping";
         category = "retail-services";
       }
-      $(".resultsLine").html("We see you like "+couponPreference+".<br> Here are some coupon suggestions to try something new!");
+
       $(".broughtBy").html("This coupon result was brought to you by Sqoot.com");
+      $(".timeTo").html("Time to try something new!");
+
 
       var queryURL = "http://api.sqoot.com/v2/deals?category_slugs="+category+"&api_key=olseu";
       console.log(queryURL);
@@ -233,8 +257,14 @@ function pageLoad(){
         console.log(response.deals[randomNum]);
         var outcome = response.deals[randomNum];
         console.log(outcome);
-        $(".apiResult").append(outcome.deal.description);
-     });
+        $(".resultsLine").html("We see you like "+couponPreference+".<br> Be your thrifty self and try out this deal!");
+        $(".title").append(outcome.deal.short_title);
+        $(".apiResult").append("<img src="+outcome.deal.image_url+">");
+        $(".apiResult").attr('id', "couponImage");
+          $(".apiResult").on('click',function(){
+              window.open(outcome.deal.untracked_url,'_blank');
+            });
+        });
     }
 
     $(".a1").on('click',function(){
@@ -263,6 +293,8 @@ function pageLoad(){
 $(".ampedMood").click(function(){
 	  $("#mood").hide();
 	  $("#mainQuestionArea").show();
+    $(".movieABC").hide();
+    $(".couponABC").hide();
 		$('.questionAsked').html('<h1>Which is most appealing?</h1>');
     $('.text1').html('Sports, sports, sports');
     $('.text2').html('Show me some standup');
