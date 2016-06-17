@@ -321,8 +321,6 @@ $(".ampedMood").click(function(){
 						 $('#mainQuestionArea').hide();
 						 $('#resultsPage').show();
 						 var team = $('#team').val().trim();
-						 // $('#answers, #question, #instructions').empty();
-						 //need to change ajax call
 						 var queryURL = 'https://api.seatgeek.com/2/performers?q='+team;
 						 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 							 console.log(response);
@@ -368,6 +366,8 @@ $(".ampedMood").click(function(){
 		$('.a2').on('click',function(){
 			$('#mainQuestionArea').hide();
 			$('#resultsPage').show();
+      $(".timeTo").html("Enjoy the show!");
+      $(".broughtBy").html("Click your result to find out more.<br>This coupon result was brought to you by SeatGeek.com");
 			var queryURL = 'https://api.seatgeek.com/2/events?q=comedy&lat='+latitude+"&lon="+longitude;
 			$.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 				console.log(response);
