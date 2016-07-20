@@ -263,7 +263,7 @@ function resetPage(){
       $(".timeTo").html("Time to try something new!");
 
 			//feed the user's selected coupon category and their latitude and longitude into a query url to the sqoot api.
-      var queryURL = "http://api.sqoot.com/v2/deals?category_slugs="+category+"&api_key=olseu&location="+latitude+","+longitude;
+      var queryURL = "https://api.sqoot.com/v2/deals?category_slugs="+category+"&api_key=olseu&location="+latitude+","+longitude;
       console.log(queryURL);
       $.ajax({
         url: queryURL,
